@@ -26,3 +26,28 @@
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
 
         pack();
+
+String username = txt_username.getText();
+        char[] pass = txt_password.getPassword();
+        String userpassword = String.valueOf(pass);
+        
+        try{
+        String sqlquery = "Select * From Table1 WHERE user_name = ? and user_password = ? ";
+        pst = conn.prepareStatement(sqlquery);
+        pst.setString(1,username);
+        pst.setString(2, userpassword);
+            rs = pst.executeQuery();
+            
+            if(!rs.next())
+            {
+            JOptionPane.showMessageDialog(null,"incorrect input either username or password");
+            
+            }
+            else
+            {
+            JOptionPane.showMessageDialog(null,"login successfull");
+            }
+        }catch(SQLException e){
+            
+            JOptionPane.showMessageDialog(null, e);
+        }
